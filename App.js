@@ -1,12 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AuthStack from './src/navigation/AuthStack';
+
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="animate-pulse">Open sdfsd up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
+    
   );
 }
 
