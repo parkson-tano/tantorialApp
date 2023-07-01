@@ -22,26 +22,60 @@ import TwitterSVG from '../../assets/images/misc/twitter.svg';
 import CustomButton from '../../components/CustomButton';
 import InputField from '../../components/InputField';
 import CustomSVG from '../../components/CustomSVG';
+import { registerUser } from '../../context/actions/auth';
 
 import RegistrationSVG from '../../assets/images/misc/registration.svg';
+import { Alert } from 'react-native';
 const RegisterScreen = ({ navigation }) => {
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [dobLabel, setDobLabel] = useState('Date of Birth');
+  const [submit, setSubmit] = useState(false)
+  const [submitError, setSubmitError] = useState("")
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+  const [tutor, setTutor] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmit(true);
+    try {
+      const userData = {
+        email: email,
+        password: password,
+        phone_number: phoneNumber,
+        tutor: false,
+        verify: false,
+        first_name: firstName,
+        last_name: lastName,
+      };
+      const decoded = await registerUser(userData);
+      navigation.navigate('Login')
+      setSubmit(false);
+      setSubmitError(null);
+    } catch (err) {
+      Alert.alert("Registration Failed", err.message);
+      console.log(err);
+      setSubmitError(err.message);  // set the error message in the state
+      setSubmit(false)
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{ paddingHorizontal: 25 }}>
-          
-
+        style={{ paddingHorizontal: 25,
+              paddingVertical: 25,
+        }}>
         <Text
           style={{
             fontSize: 28,
             fontWeight: '500',
             color: '#333',
             marginBottom: 30,
+            textAlign: 'center',
           }}>
           Register
         </Text>
@@ -117,6 +151,32 @@ const RegisterScreen = ({ navigation }) => {
         <Text style={{ textAlign: 'center', color: '#666', marginBottom: 30 }}>
           Or, register with email ...
         </Text>
+        <InputField
+          label={'First Name'}
+          icon={
+            <MaterialIcons
+              name="person-outline"
+              size={25}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          fieldValue={firstName}
+          onChangeText={(text) => setFirstName(text)}
+        />
+        <InputField
+          label={'Last Name'}
+          icon={
+            <MaterialIcons
+              name="person-outline"
+              size={25}
+              color="#666"
+              style={{ marginRight: 5 }}
+            />
+          }
+          fieldValue={lastName}
+          onChangeText={(text) => setLastName(text)}
+        />
 
         <InputField
           label={'Phone Number'}
@@ -129,6 +189,8 @@ const RegisterScreen = ({ navigation }) => {
               style={{ marginRight: 5 }}
             />
           }
+          fieldValue={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
         />
 
         <InputField
@@ -142,6 +204,8 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           keyboardType="email-address"
+          fieldValue={email}
+          onChangeText={(text) => setEmail(text)}
         />
 
         <InputField
@@ -155,6 +219,8 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           inputType="password"
+          fieldValue={password}
+          onChangeText={(text) => setPassword(text)}
         />
 
         <InputField
@@ -168,47 +234,10 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           inputType="password"
+          fieldValue={confirmPassword}
+          onChangeText={(text) => setConfirmPassword(text)}
         />
-
-        {/* <View
-          style={{
-            flexDirection: 'row',
-            borderBottomColor: '#ccc',
-            borderBottomWidth: 1,
-            paddingBottom: 8,
-            marginBottom: 30,
-          }}>
-          <Ionicons
-            name="calendar-outline"
-            size={20}
-            color="#666"
-            style={{ marginRight: 5 }}
-          />
-          <TouchableOpacity onPress={() => setOpen(true)}>
-            <Text style={{ color: '#666', marginLeft: 5, marginTop: 5 }}>
-              {dobLabel}
-            </Text>
-          </TouchableOpacity>
-        </View> */}
-
-        {/* <DatePicker
-          modal
-          open={open}
-          date={date}
-          mode={'date'}
-          maximumDate={new Date('2005-01-01')}
-          minimumDate={new Date('1980-01-01')}
-          onConfirm={date => {
-            setOpen(false);
-            setDate(date);
-            setDobLabel(date.toDateString());
-          }}
-          onCancel={() => {
-            setOpen(false);
-          }}
-        /> */}
-
-        <CustomButton label={'Register'} onPress={() => { }} />
+        <CustomButton label={'Register'} onPress={handleSubmit} />
 
         <View
           style={{
