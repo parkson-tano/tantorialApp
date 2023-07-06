@@ -8,24 +8,23 @@ import {
     FAB,
     IconButton,
 } from "@react-native-material/core";
-export default function CustomButton({ label, onPress }) {
+export default function CustomBtn({ label, onPress }) {
     return (
         <TouchableOpacity
             onPress={onPress}
             style={{
-                backgroundColor: '#AD40AF',
+                backgroundColor: '#fff',
                 padding: 15,
+                paddingHorizontal: 40,
                 borderRadius: 10,
-                marginBottom: 30,
+                marginBottom: 20,
             }}>
-                
+
             <Text
                 style={{
                     textAlign: 'center',
                     fontWeight: '700',
-                    
-                    fontSize: 25,
-                    color: '#fff',
+                    fontSize: 20,
                 }}>
                 {label}
             </Text>

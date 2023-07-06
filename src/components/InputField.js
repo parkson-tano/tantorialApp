@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { TextInput } from 'react-native-paper';
 export default function InputField({
     label,
     icon,
@@ -21,24 +22,28 @@ export default function InputField({
             <View
                 style={{
                     flexDirection: 'row',
-                    borderBottomColor: '#ccc',
-                    borderBottomWidth: 1,
                     paddingBottom: 8,
-                    marginBottom: 20,
-                    marginTop: 35,
+                    marginBottom: 10,
+                    marginTop: 15,
                 }}>
-                {icon}
                 {inputType === 'password' ? (
+
                     <TextInput
+                        mode="outlined"
                         placeholder={label}
                         keyboardType={keyboardType}
                         style={{ flex: 1, paddingVertical: 0 }}
                         secureTextEntry={!passwordVisible}
+                        left={<TextInput.Icon icon={icon} />}
+                        
+                        right={<TextInput.Icon icon={passwordVisible ? 'eye-off' : 'eye'} onPress={togglePasswordVisibility} />}
                         onChangeText={onChangeText}
                         value={fieldValue}
                     />
                 ) : (
                     <TextInput
+                        mode="outlined"
+                        left={<TextInput.Icon icon={icon} />}
                         placeholder={label}
                         keyboardType={keyboardType}
                         style={{ flex: 1, paddingVertical: 0 }}
@@ -46,21 +51,11 @@ export default function InputField({
                         value={fieldValue}
                     />
                 )}
-                {inputType === 'password' && (
-                    <TouchableOpacity onPress={togglePasswordVisibility}>
-                        <Ionicons
-                            name={passwordVisible ? 'ios-eye-off' : 'ios-eye'}
-                            size={25}
-                            color="#666"
-                            style={{ marginLeft: 5 }}
-                        />
-                    </TouchableOpacity>
-                )}
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                 {fieldButtonLabel && (
                     <TouchableOpacity onPress={fieldButtonFunction}>
-                        <Text style={{ color: '#AD40AF', fontWeight: '700', marginBottom:35 }}>
+                        <Text style={{ color: '#AD40AF', fontWeight: '700', marginBottom: 35 }}>
                             {fieldButtonLabel}
                         </Text>
                     </TouchableOpacity>
