@@ -2,12 +2,13 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode';
 import { API_URL } from '../../utils/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 export const loginUser = async (userData) => {
     try {
         const res = await axios.post(`${API_URL}auth/login`, userData);
         const token = res.data.access;
-        AsyncStorage.setItem('jwtToken', token);
+        await SecureStore.setItemAsync('jwtToken', token);
         const decoded = jwt_decode(token);
         return decoded;
 
@@ -31,7 +32,7 @@ export const logoutUser = () => {
 }
 
 export const getCurrentUser = () => {
-    const token = AsyncStorage.getItem('jwtToken');
+    const token = SecureStore.getItemAsync('jwtToken');
     if (token) {
         const decoded = jwt_decode(token);
         return decoded;

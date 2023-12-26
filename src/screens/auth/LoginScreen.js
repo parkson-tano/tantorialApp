@@ -11,8 +11,8 @@ import {
 import { ActivityIndicator } from "@react-native-material/core";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import CustomButton from '../../components/CustomButton';
-import InputField from '../../components/InputField';
+import CustomButton from '../../components/common/CustomButton';
+import InputField from '../../components/common/InputField';
 import { loginUser } from '../../context/actions/auth';
 import { useAuth } from '../../context/auth-context';
 import { TextInput } from 'react-native-paper';
