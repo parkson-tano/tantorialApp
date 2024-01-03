@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
-import Home from '../screens/home/Home';
+import Home from '../screens/home/HomeTutor';
 import AuthStack from './AuthStack';
 
 const Tab = createBottomTabNavigator();

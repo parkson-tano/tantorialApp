@@ -14,6 +14,7 @@ export default function App() {
       <NavigationContainer>
         {
           onboard == "true" ? <OnBoardingScreen /> : <TabNavigator />
+          // onboard == "true" ? <TabNavigator /> : <OnBoardingScreen /> 
         }
       </NavigationContainer>
   );

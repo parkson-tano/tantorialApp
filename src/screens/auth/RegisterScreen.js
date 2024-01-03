@@ -13,9 +13,9 @@ import DatePicker from 'react-native-date-picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import CustomButton from '../../components/CustomButton';
-import InputField from '../../components/InputField';
-import CustomSVG from '../../components/CustomSVG';
+import CustomButton from '../../components/common/CustomButton';
+import InputField from '../../components/common/InputField';
+import CustomSVG from '../../components/common/CustomSVG';
 import { registerUser } from '../../context/actions/auth';
 
 import RegistrationSVG from '../../assets/images/misc/registration.svg';

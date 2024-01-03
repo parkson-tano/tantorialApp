@@ -9,9 +9,9 @@ import {
     Stack,
     Text,
 } from "@react-native-material/core";
-import CustomButton from '../components/CustomButton';
+import CustomButton from '../components/common/CustomButton';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-import CustomBtn from '../components/CustomBtn';
+import CustomBtn from '../components/common/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const OnBoardingScreen = ({ navigation }) => {
